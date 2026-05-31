@@ -353,6 +353,19 @@ input[type=file]{display:none}
   display:flex;align-items:center;gap:6px;
 }
 
+
+.bottom-bar{position:fixed;bottom:0;left:0;right:0;z-index:200;background:var(--dark);border-top:1px solid rgba(255,255,255,.12);padding:10px 20px;display:flex;align-items:center;justify-content:space-between;gap:12px;box-shadow:0 -4px 24px rgba(0,0,0,.3)}
+.bottom-bar-left{display:flex;align-items:center;gap:8px;flex:1;min-width:0;overflow:hidden}
+.bottom-bar-name{font-size:.88rem;font-weight:700;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:180px}
+.btn-bb{display:inline-flex;align-items:center;gap:5px;padding:9px 16px;border-radius:9px;font-weight:700;font-size:.85rem;cursor:pointer;transition:all .2s;white-space:nowrap;font-family:inherit}
+.btn-bb-ghost{background:#fff;color:#1E293B;border:none}
+.btn-bb-ghost:hover{background:#F1F5F9}
+.btn-bb-primary{background:#4F46E5;color:#fff;border:none}
+.btn-bb-primary:hover{background:#4338CA;transform:translateY(-1px)}
+.btn-bb-en{background:linear-gradient(135deg,#1D4ED8,#3B82F6);color:#fff;border:none}
+.btn-bb-en:hover{transform:translateY(-1px);box-shadow:0 4px 16px rgba(59,130,246,.4)}
+body{padding-bottom:68px!important}
+@media(max-width:600px){.bottom-bar-name{max-width:90px}.btn-bb-en{display:none}}
 </style>
 </head>
 <body>
@@ -365,75 +378,20 @@ input[type=file]{display:none}
     <span style="font-size:.62rem;font-weight:700;background:#4F46E5;color:#fff;padding:2px 10px;border-radius:50px;margin-left:8px;letter-spacing:.03em">CV Builder</span>
   </div>
   <div class="topbar-actions">
-    <button class="btn-app btn-ghost" onclick="previewOnly()">&#x1F441; Preview</button>
-    <button class="btn-app btn-success" onclick="printCV()">&#x1F4E5; Download PDF</button>
   </div>
 </div>
 
 <!-- TIER SELECTOR -->
-<div class="tier-wrap">
-  <div class="tier-inner">
-    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px">
-      <div class="tier-label" style="margin-bottom:0">Pilih level pengalamanmu</div>
-      <a href="https://website.karyawansakti.com" style="font-size:.7rem;font-weight:600;color:#93C5FD;text-decoration:none;display:flex;align-items:center;gap:4px;background:rgba(147,197,253,.1);border:1px solid rgba(147,197,253,.2);padding:3px 10px;border-radius:50px;white-space:nowrap" target="_blank">
-        🌐 Butuh website profesional? →
-      </a>
-    </div>
-    <div class="tier-cards">
-      <div class="tier-card active" onclick="setTier('fresh')" id="tier-fresh">
-        <div style="display:flex;align-items:center;gap:6px;margin-bottom:4px">
-          <span class="tier-card-ico">🌱</span>
-          <span class="tier-card-nm">Fresh Graduate</span>
-          <span class="tier-card-badge" style="background:rgba(14,165,233,.2);color:#38BDF8;border:1px solid rgba(14,165,233,.25)">Horizon</span>
-        </div>
-        <div class="tier-card-yrs">0–2 thn · Pendidikan & skills menonjol · Cocok untuk entry-level & magang</div>
-      </div>
-      <div class="tier-card" onclick="setTier('experienced')" id="tier-experienced">
-        <div style="display:flex;align-items:center;gap:6px;margin-bottom:4px">
-          <span class="tier-card-ico">🏢</span>
-          <span class="tier-card-nm">Experienced</span>
-          <span class="tier-card-badge" style="background:rgba(30,58,95,.3);color:#93C5FD;border:1px solid rgba(30,58,95,.35)">Meridian</span>
-        </div>
-        <div class="tier-card-yrs">3–10 thn · Pengalaman & pencapaian quantified · ATS-friendly</div>
-      </div>
-      <div class="tier-card" onclick="setTier('expert')" id="tier-expert">
-        <div style="display:flex;align-items:center;gap:6px;margin-bottom:4px">
-          <span class="tier-card-ico">⭐</span>
-          <span class="tier-card-nm">Expert / Senior</span>
-          <span class="tier-card-badge" style="background:rgba(212,163,66,.15);color:#D4A342;border:1px solid rgba(212,163,66,.2)">Summit</span>
-        </div>
-        <div class="tier-card-yrs">10+ thn · Executive profile · Competencies & board roles</div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- Diff info button -->
-<button class="tier-diff-btn" onclick="document.getElementById('diffPanel').classList.toggle('show')">
-  ℹ️ Perbedaan template
-</button>
-<div class="diff-panel" id="diffPanel">
-  <div style="font-size:.72rem;font-weight:700;color:#64748B;text-transform:uppercase;letter-spacing:.05em;margin-bottom:10px">Bedanya Apa?</div>
-  <div class="diff-row">
-    <div class="diff-ico">🌱</div>
-    <div>
-      <div class="diff-title">Horizon — Fresh Graduate</div>
-      <div class="diff-body">Pendidikan di atas. Menonjolkan IPK, proyek kuliah, magang, dan organisasi. Cocok melamar kerja pertama atau internship.</div>
-    </div>
-  </div>
-  <div class="diff-row">
-    <div class="diff-ico">🏢</div>
-    <div>
-      <div class="diff-title">Meridian — Experienced</div>
-      <div class="diff-body">Pengalaman kerja di atas. Fokus pada pencapaian dengan angka. Professional summary yang kuat. ATS-friendly untuk melamar posisi mid-senior.</div>
-    </div>
-  </div>
-  <div class="diff-row">
-    <div class="diff-ico">⭐</div>
-    <div>
-      <div class="diff-title">Summit — Expert / Senior</div>
-      <div class="diff-body">Executive summary + core competencies di atas. Ada section board roles, publikasi, dan speaking. Untuk posisi direktur, C-level, atau konsultan senior.</div>
-    </div>
+<div class="tier-wrap" style="padding:10px 20px 8px">
+  <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
+    <div style="font-size:.72rem;font-weight:700;color:#64748B;text-transform:uppercase;letter-spacing:.06em;white-space:nowrap">Template CV</div>
+    <select id="tierDropdown" onchange="setTier(this.value)" style="background:rgba(255,255,255,.08);border:1.5px solid rgba(255,255,255,.15);border-radius:9px;color:#fff;font-size:.88rem;font-weight:700;padding:7px 14px;cursor:pointer;font-family:inherit;outline:none;flex:1;max-width:300px">
+      <option value="fresh" style="background:#1E293B">&#x1F331; Fresh Graduate &mdash; Horizon (0&ndash;2 thn)</option>
+      <option value="experienced" style="background:#1E293B">&#x1F3E2; Experienced &mdash; Meridian (3&ndash;10 thn)</option>
+      <option value="expert" style="background:#1E293B">&#x2B50; Expert / Senior &mdash; Summit (10+ thn)</option>
+    </select>
+    <span id="tierDesc" style="font-size:.76rem;color:rgba(255,255,255,.4)">Pendidikan &amp; skills menonjol</span>
+    <a href="https://website.karyawansakti.com" style="font-size:.7rem;font-weight:600;color:#93C5FD;text-decoration:none;background:rgba(147,197,253,.1);border:1px solid rgba(147,197,253,.2);padding:3px 10px;border-radius:50px;white-space:nowrap;margin-left:auto" target="_blank">&#x1F310; Website? &rarr;</a>
   </div>
 </div>
 
@@ -733,8 +691,9 @@ let expId=0, eduId=0, projId=0, actId=0, certId=0;
 // ══════════════════════════════════════════
 function setTier(t) {
   STATE.tier = t;
-  document.querySelectorAll('.tier-card').forEach(c => c.classList.remove('active'));
-  document.getElementById('tier-'+t).classList.add('active');
+  var dd=document.getElementById('tierDropdown');if(dd)dd.value=t;
+  var descs={fresh:'Pendidikan & skills menonjol',experienced:'Pengalaman & pencapaian quantified',expert:'Executive profile & competencies'};
+  var td=document.getElementById('tierDesc');if(td)td.textContent=descs[t]||'';
 
   const s2l = document.getElementById('s2-label');
   const s2h = document.getElementById('s2-hint');
@@ -822,7 +781,7 @@ function handlePhoto(input) {
 // ══════════════════════════════════════════
 function addExp() {
   const id = ++expId;
-  STATE.experiences.push({id, title:'', company:'', location:'', start:'', end:'', current:false, desc:'', bullets:['']});
+  STATE.experiences.push({id, title:'', company:'', location:'', start:'', end:'', current:false, level:'mid', desc:'', bullets:['']});
   renderLists(); update();
   setTimeout(()=>document.getElementById(`exp-title-${id}`)?.focus(),100);
 }
@@ -974,6 +933,17 @@ function renderLists() {
           <div class="form-label">Jabatan / Posisi</div>
           <input class="form-input" id="exp-title-${exp.id}" value="${exp.title}" placeholder="Software Engineer" oninput="STATE.experiences.find(e=>e.id===${exp.id}).title=this.value;update()">
         </div>
+        <div class="form-group" style="max-width:200px">
+          <div class="form-label">Level</div>
+          <select class="form-input" style="cursor:pointer" onchange="STATE.experiences.find(e=>e.id===${exp.id}).level=this.value;update()">
+            <option value="intern" ${exp.level==='intern'?'selected':''}>Intern / Magang</option>
+            <option value="junior" ${exp.level==='junior'?'selected':''}>Junior (0-2 thn)</option>
+            <option value="mid" ${exp.level==='mid'?'selected':''}>Mid-level (2-5 thn)</option>
+            <option value="senior" ${exp.level==='senior'?'selected':''}>Senior (5+ thn)</option>
+            <option value="lead" ${exp.level==='lead'?'selected':''}>Lead / Manager</option>
+            <option value="director" ${exp.level==='director'?'selected':''}>Director / VP</option>
+          </select>
+        </div>
         <div class="form-group">
           <div class="form-label">Perusahaan / Organisasi</div>
           <input class="form-input" id="exp-co-${exp.id}" value="${exp.company}" placeholder="PT Nama Perusahaan" oninput="STATE.experiences.find(e=>e.id===${exp.id}).company=this.value;update()">
@@ -1024,7 +994,7 @@ function renderLists() {
         </div>
         <div class="form-group">
           <div class="form-label">Gelar / Jenjang</div>
-          <input class="form-input" value="${edu.degree}" placeholder="S1 / Bachelor's" oninput="STATE.education.find(e=>e.id===${edu.id}).degree=this.value;update()">
+          <input class="form-input" value="${edu.degree}" placeholder="S1 / Sarjana" oninput="STATE.education.find(e=>e.id===${edu.id}).degree=this.value;update()">
         </div>
       </div>
       <div class="form-row">
@@ -1539,12 +1509,137 @@ document.addEventListener('DOMContentLoaded', () => {
   setTier('fresh');
 });
 </script>
-
-<!-- Mobile bottom bar -->
-<div class="mobile-preview-bar" id="mobileBar">
-  <button class="btn-app btn-ghost" onclick="toggleMobilePreview()">👁️ Preview</button>
-  <button class="btn-app btn-success" onclick="printCV()" style="flex:2">📥 Download PDF</button>
+<div class="bottom-bar">
+  <div class="bottom-bar-left">
+    <span class="bottom-bar-name" id="bottomName">CV Builder</span>
+  </div>
+  <div style="display:flex;align-items:center;gap:8px">
+    <button class="btn-bb btn-bb-ghost" onclick="previewOnly()">&#x1F441; Preview</button>
+    <button class="btn-bb btn-bb-primary" onclick="printCV()">&#x1F4E5; Download PDF</button>
+    <button class="btn-bb btn-bb-en" onclick="translateAndDownload()">&#x1F310; English CV</button>
+  </div>
 </div>
+
+<div id="enCVModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.65);z-index:9999;align-items:center;justify-content:center">
+  <div style="background:#fff;border-radius:20px;padding:32px;max-width:520px;width:90%;box-shadow:0 24px 64px rgba(0,0,0,.25)">
+    <div style="font-family:'Sora',sans-serif;font-size:1.2rem;font-weight:800;color:#0F172A;margin-bottom:6px">&#x1F310; Convert CV ke Bahasa Inggris</div>
+    <div style="font-size:.87rem;color:#64748B;margin-bottom:20px;line-height:1.65">Semua konten CV kamu akan ditranslate ke Bahasa Inggris secara otomatis menggunakan AI &mdash; nama jabatan, ringkasan, pengalaman, keahlian &mdash; lalu didownload sebagai CV English yang rapi.</div>
+    <div style="background:#F1F5F9;border-radius:50px;height:8px;margin-bottom:8px;overflow:hidden">
+      <div id="enBar" style="height:100%;background:linear-gradient(to right,#3B82F6,#1D4ED8);border-radius:50px;transition:width .4s;width:0"></div>
+    </div>
+    <div id="enStatus" style="font-size:.82rem;color:#64748B;margin-bottom:20px;min-height:20px">Siap untuk convert...</div>
+    <div id="enPreview" style="background:#F8FAFC;border:1px solid #E2E8F0;border-radius:10px;padding:14px;margin-bottom:18px;font-size:.82rem;color:#334155;line-height:1.7;display:none;max-height:160px;overflow-y:auto"></div>
+    <div style="display:flex;gap:10px;justify-content:flex-end">
+      <button onclick="document.getElementById('enCVModal').style.display='none'" style="padding:10px 18px;background:transparent;color:#64748B;border:1.5px solid #E2E8F0;border-radius:10px;font-weight:600;cursor:pointer;font-size:.9rem">Batal</button>
+      <button id="btnEnDl" onclick="startEnTranslate()" style="padding:10px 24px;background:#1D4ED8;color:#fff;border:none;border-radius:10px;font-weight:700;cursor:pointer;font-size:.9rem">&#x1F680; Mulai Convert</button>
+    </div>
+  </div>
+</div>
+<script>
+var _enState=null;
+function translateAndDownload(){
+  collectState();
+  _enState=JSON.parse(JSON.stringify(STATE));
+  document.getElementById('enCVModal').style.display='flex';
+  document.getElementById('enBar').style.width='0%';
+  document.getElementById('enStatus').textContent='Siap untuk convert...';
+  document.getElementById('enPreview').style.display='none';
+  var btn=document.getElementById('btnEnDl');
+  btn.disabled=false;
+  btn.textContent='Mulai Convert';
+}
+function setEnProg(p,m){
+  document.getElementById('enBar').style.width=p+'%';
+  document.getElementById('enStatus').textContent=m;
+}
+async function callClaude(prompt){
+  try{
+    var r=await fetch('https://api.anthropic.com/v1/messages',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({
+        model:'claude-sonnet-4-20250514',
+        max_tokens:800,
+        messages:[{role:'user',content:prompt}]
+      })
+    });
+    var d=await r.json();
+    return(d.content&&d.content[0])?d.content[0].text.trim():'';
+  }catch(e){return '';}
+}
+async function startEnTranslate(){
+  var btn=document.getElementById('btnEnDl');
+  btn.disabled=true;
+  btn.textContent='Translating...';
+  var S=_enState,EN=JSON.parse(JSON.stringify(S));
+  try{
+    setEnProg(10,'Translating job title...');
+    if(S.personal.title){
+      EN.personal.title=await callClaude('Translate this Indonesian job title to English. Return ONLY the title: '+S.personal.title);
+    }
+    setEnProg(25,'Translating summary...');
+    if(S.summary){
+      EN.summary=await callClaude('Translate this Indonesian CV summary to English. Return ONLY the translation: '+S.summary);
+    }
+    setEnProg(45,'Translating experience...');
+    for(var i=0;i<EN.experiences.length;i++){
+      var exp=S.experiences[i];
+      if(exp.title){
+        EN.experiences[i].title=await callClaude('Translate this job title to English. Return ONLY the title: '+exp.title);
+      }
+      var buls=(exp.bullets||[]).filter(function(b){return b.trim();});
+      if(buls.length){
+        var nums=buls.map(function(b,j){return (j+1)+') '+b;}).join(' | ');
+        var res=await callClaude('Translate these CV bullet points to English action verbs. Return numbered list separated by | : '+nums);
+        EN.experiences[i].bullets=res.split('|').map(function(l){return l.trim().replace(/^[0-9]+[)\.]\s*/,'');}).filter(Boolean);
+      }
+    }
+    setEnProg(65,'Translating skills...');
+    if(S.skills&&S.skills.soft&&S.skills.soft.length){
+      var sft=await callClaude('Translate these soft skills to English. Return comma-separated list only: '+S.skills.soft.join(', '));
+      EN.skills.soft=sft.split(',').map(function(s){return s.trim();}).filter(Boolean);
+    }
+    setEnProg(80,'Translating projects...');
+    for(var j=0;j<(EN.projects||[]).length;j++){
+      if(S.projects[j]&&S.projects[j].name){
+        EN.projects[j].name=await callClaude('Translate to English, return ONLY the translation: '+S.projects[j].name);
+      }
+    }
+    setEnProg(93,'Generating PDF...');
+    var prev=document.getElementById('enPreview');
+    prev.style.display='block';
+    prev.innerHTML='<strong>Preview:</strong><br>'+(EN.personal.name||'')+' &mdash; <em>'+(EN.personal.title||'')+'</em><br><br>'+(EN.summary||'').substring(0,200)+'...';
+    generateEnPDF(EN);
+    setEnProg(100,'Done!');
+    btn.textContent='Downloaded!';
+    setTimeout(function(){document.getElementById('enCVModal').style.display='none';},2000);
+  }catch(err){
+    document.getElementById('enStatus').textContent='Error: '+err.message;
+    btn.disabled=false;
+    btn.textContent='Coba Lagi';
+  }
+}
+function generateEnPDF(EN){
+  var orig=STATE;
+  STATE=EN;
+  var t=getTier(),cv='';
+  if(t==='fresh') cv=renderHorizon();
+  else if(t==='experienced') cv=renderMeridian();
+  else cv=renderSummit();
+  STATE=orig;
+  var w=window.open('','_blank');
+  var nm=EN.personal.name||'Resume';
+  var st=document.querySelector('style')?document.querySelector('style').textContent:'';
+  w.document.write('<!DOCTYPE html><html><head><meta charset="UTF-8">'+
+    '<title>CV EN - '+nm+'</title>'+
+    '<link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap" rel="stylesheet">'+
+    '<style>*{box-sizing:border-box;margin:0;padding:0}body{font-family:Lato,sans-serif;background:#fff;color:#1a1a1a}'+
+    '@page{margin:0;size:A4}@media print{body{-webkit-print-color-adjust:exact;print-color-adjust:exact}}'+
+    st+'</style></head><body>'+cv+'</body></html>');
+  w.document.close();
+  setTimeout(function(){w.print();},800);
+}
+</script>
 
 </body>
 </html>
